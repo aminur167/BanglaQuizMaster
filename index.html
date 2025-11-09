@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>বাংলা এসএসসি কুইজ - ৯-১০ শ্রেণি</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.maateen.me/kalpurush/font.css" rel="stylesheet">
+</head>
+<body>
+    <!-- ডার্ক মোড টগল -->
+    <div class="theme-toggle">
+        <button id="themeToggle" class="theme-btn">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
+
+    <!-- মেইন কন্টেইনার -->
+    <main class="container">
+        <!-- হোম স্ক্রিন -->
+        <section class="screen home-screen active">
+            <div class="glass-card">
+                <div class="app-header">
+                    <h1>বাংলা এসএসসি কুইজ</h1>
+                    <p>৯ম-১০ম শ্রেণির এসএসসি পরীক্ষার প্রস্তুতি</p>
+                </div>
+                
+                <div class="mode-selection">
+                    <h2>মোড নির্বাচন করুন</h2>
+                    <div class="mode-cards">
+                        <div class="mode-card" data-mode="practice">
+                            <i class="fas fa-book-open"></i>
+                            <h3>প্র্যাকটিস মোড</h3>
+                            <p>সময়সীমা নেই, সাথে সাথে উত্তর দেখুন</p>
+                        </div>
+                        <div class="mode-card" data-mode="exam">
+                            <i class="fas fa-clock"></i>
+                            <h3>পরীক্ষার মোড</h3>
+                            <p>প্রশ্ন প্রতি ২০ সেকেন্ড সময়</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- যোগাযোগ বাটন -->
+                <div class="home-actions">
+                    <button class="btn btn-outline" id="contactBtn">
+                        <i class="fas fa-address-card"></i> ডেভেলপারের সাথে যোগাযোগ
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- অধ্যায় নির্বাচন স্ক্রিন -->
+        <section class="screen chapter-screen">
+            <div class="glass-card">
+                <div class="screen-header">
+                    <h2 id="modeTitle">অধ্যায় নির্বাচন করুন</h2>
+                    <button class="back-btn" id="backToHome">
+                        <i class="fas fa-arrow-left"></i> ফিরে যান
+                    </button>
+                </div>
+                
+                <div class="chapter-cards">
+                    <div class="chapter-card" data-chapter="কবিতা">
+                        <i class="fas fa-pen-fancy"></i>
+                        <h3>কবিতা অধ্যায়</h3>
+                        <p>এসএসসি বইয়ের সকল কবিতা</p>
+                        <span class="question-count">২০০+ প্রশ্ন</span>
+                    </div>
+                    <div class="chapter-card" data-chapter="গল্প">
+                        <i class="fas fa-book"></i>
+                        <h3>গল্প অধ্যায়</h3>
+                        <p>এসএসসি বইয়ের সকল গল্প</p>
+                        <span class="question-count">২০০+ প্রশ্ন</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- টপিক নির্বাচন স্ক্রিন -->
+        <section class="screen topic-screen">
+            <div class="glass-card">
+                <div class="screen-header">
+                    <h2 id="topicTitle">টপিক নির্বাচন করুন</h2>
+                    <button class="back-btn" id="backToChapter">
+                        <i class="fas fa-arrow-left"></i> ফিরে যান
+                    </button>
+                </div>
+                
+                <div class="topic-cards" id="topicCards">
+                    <!-- টপিক কার্ডগুলি এখানে ডাইনামিকভাবে লোড হবে -->
+                </div>
+            </div>
+        </section>
+
+        <!-- কোয়িজ স্ক্রিন -->
+        <section class="screen quiz-screen">
+            <div class="glass-card">
+                <!-- হেডার -->
+                <header class="quiz-header">
+                    <div class="quiz-info">
+                        <div class="chapter-name" id="currentChapter">কবিতা অধ্যায়</div>
+                        <div class="topic-name" id="currentTopic">আমার সোনার বাংলা</div>
+                        <div class="mode-badge" id="currentMode">প্র্যাকটিস মোড</div>
+                    </div>
+                    <div class="timer-container" id="timerContainer">
+                        <div class="time-text">সময় বাকি</div>
+                        <div class="timer-seconds" id="timer">২০</div>
+                    </div>
+                </header>
+
+                <!-- প্রোগ্রেস -->
+                <div class="progress-container">
+                    <div class="progress-info">
+                        <span class="progress-text" id="progressText">প্রশ্ন ১/২০</span>
+                        <span class="progress-percent" id="progressPercent">৫%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+
+                <!-- টাইম লাইন -->
+                <div class="time-line" id="timeLine"></div>
+
+                <!-- প্রশ্ন -->
+                <div class="question-container">
+                    <div class="question-text" id="questionText"></div>
+                </div>
+
+                <!-- অপশন -->
+                <div class="options-container" id="optionsContainer"></div>
+
+                <!-- ব্যাখ্যা (প্র্যাকটিস মোডে) -->
+                <div class="explanation-container" id="explanationContainer">
+                    <div class="explanation-content">
+                        <h4><i class="fas fa-lightbulb"></i> ব্যাখ্যা:</h4>
+                        <p id="explanationText"></p>
+                    </div>
+                </div>
+
+                <!-- ফুটার -->
+                <footer class="quiz-footer">
+                    <button class="btn btn-secondary" id="quitQuiz">কোয়িজ ছাড়ুন</button>
+                    <button class="btn btn-warning" id="prevQuestion" disabled>পূর্ববর্তী প্রশ্ন</button>
+                    <button class="btn btn-info" id="skipQuestion">Skip প্রশ্ন</button>
+                    <button class="btn btn-primary" id="nextQuestion" disabled>পরবর্তী প্রশ্ন</button>
+                </footer>
+            </div>
+        </section>
+
+        <!-- রেজাল্ট স্ক্রিন -->
+        <section class="screen result-screen">
+            <div class="glass-card">
+                <div class="result-header">
+                    <div class="result-icon">
+                        <i class="fas fa-trophy" id="resultTrophy"></i>
+                    </div>
+                    <h2>কোয়িজ সম্পন্ন!</h2>
+                    <div class="score-display">
+                        <div class="final-score" id="finalScore">০%</div>
+                        <div class="score-text" id="scoreText"></div>
+                    </div>
+                </div>
+
+                <!-- স্ট্যাটস -->
+                <div class="stats-container">
+                    <div class="stat">
+                        <div class="stat-value" id="correctAnswers">০</div>
+                        <div class="stat-label">সঠিক</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="wrongAnswers">০</div>
+                        <div class="stat-label">ভুল</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="totalQuestions">০</div>
+                        <div class="stat-label">মোট</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-value" id="bestScore">০%</div>
+                        <div class="stat-label">সেরা স্কোর</div>
+                    </div>
+                </div>
+
+                <!-- ভুল উত্তরের বিশ্লেষণ -->
+                <div class="analysis-container">
+                    <h3>উত্তরের বিশ্লেষণ</h3>
+                    <div class="wrong-answers-list" id="wrongAnswersList"></div>
+                </div>
+
+                <!-- বাটন গ্রুপ -->
+                <div class="button-group">
+                    <button class="btn btn-secondary" id="reviewAnswers">উত্তর রিভিউ</button>
+                    <button class="btn btn-primary" id="newQuiz">নতুন কোয়িজ</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- যোগাযোগ স্ক্রিন -->
+        <section class="screen contact-screen">
+            <div class="glass-card">
+                <div class="screen-header">
+                    <h2>যোগাযোগ</h2>
+                    <button class="back-btn" id="backToHomeFromContact">
+                        <i class="fas fa-arrow-left"></i> ফিরে যান
+                    </button>
+                </div>
+                
+                <div class="contact-container">
+                    <!-- ডেভেলপার ইনফো -->
+                    <div class="developer-info">
+                        <div class="developer-avatar">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <h3>মোঃ আমিনুর ইসলাম</h3>
+                        <p class="developer-title">কম্পিউটার সায়েন্স অ্যান্ড ইঞ্জিনিয়ারিং (CSE) শিক্ষার্থী</p>
+                        <p class="institution">হাজী মোহাম্মদ দানেশ বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয় (HSTU)</p>
+                    </div>
+
+                    <!-- যোগাযোগ তথ্য -->
+                    <div class="contact-details">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>ঠিকানা</strong>
+                                <p> বড়িয়া, জিয়ানগর, দুপচাঁচিয়া, বগুড়া।</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>মোবাইল</strong>
+                                <p>+880 1308 825783</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>ইমেইল</strong>
+                                <p>aminurhstu23@gmail.com</p>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <!-- একশন বাটন -->
+                    <div class="contact-actions">
+                        <button class="btn btn-primary" onclick="window.open('tel:+8801308825783')">
+                            <i class="fas fa-phone"></i> কল করুন
+                        </button>
+                        <button class="btn btn-secondary" onclick="window.open('mailto:aminurhstu23@gmail.com')">
+                            <i class="fas fa-envelope"></i> ইমেইল করুন
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- সাউন্ড ইফেক্ট -->
+    <audio id="correctSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==" type="audio/wav">
+    </audio>
+    <audio id="wrongSound" preload="auto">
+        <source src="data:audio/wav;base64,UklGRigAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQQAAAAAAA==" type="audio/wav">
+    </audio>
+
+    <script src="js/questions.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
